@@ -1,0 +1,25 @@
+# IntelliJ IDEA
+.idea/
+
+# Compiled files
+/out/
+/target/
+
+# Dependency directories
+/lib/
+
+# Eclipse files
+.classpath
+.project
+.settings/
+bin/
+# Default ignored files
+/shelf/
+/.idea/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/test
+/target
