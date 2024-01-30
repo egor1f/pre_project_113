@@ -10,15 +10,19 @@ public class Util {
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "root";
 
+    public Util() {
+    }
+
     public static Connection getConnection() {
         Connection connection = null;
+
         try {
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | ClassNotFoundException var2) {
+            var2.printStackTrace();
         }
+
         return connection;
     }
-
 }

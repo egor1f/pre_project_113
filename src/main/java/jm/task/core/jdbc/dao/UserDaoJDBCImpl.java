@@ -2,7 +2,6 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +10,8 @@ public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
 
     }
-
     public void createUsersTable() {
-        // Код для создания таблицы
+    // Код для создания таблицы
         try (Connection connection = Util.getConnection()) {
             String sql = "CREATE TABLE IF NOT EXISTS users (\n" +
                     " id BIGINT PRIMARY KEY AUTO_INCREMENT,\n" +
@@ -43,67 +41,36 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         // Код для сохранения пользователя в таблицу
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = Util.getConnection();
-            statement = connection.prepareStatement("INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)");
-            statement.setString(1, name);
-            statement.setString(2, lastName);
-            statement.setByte(3, age);
-            statement.executeUpdate();
+        try (Connection connection = Util.getConnection();
+             PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)")) {
+                statement.setString(1, name);
+                statement.setString(2, lastName);
+                statement.setByte(3, age);
+                statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
     public void removeUserById(long id) {
         // Код для удаления пользователя по id из таблицы
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = Util.getConnection();
-            statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
-            statement.setLong(1, id);
-            statement.executeUpdate();
+        try (
+            Connection connection = Util.getConnection();
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?")) {
+                statement.setLong(1, id);
+                statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
     public List<User> getAllUsers() {
         // Код для получения всех пользователей из таблицы
         List<User> allUsers = new ArrayList<>();
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        try {
-            connection = Util.getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM users");
-            while(resultSet.next()) {
+        try (Connection connection = Util.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM users")) {
+            while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong("id"));
                 user.setName(resultSet.getString("name"));
@@ -113,20 +80,6 @@ public class UserDaoJDBCImpl implements UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return allUsers;
     }
