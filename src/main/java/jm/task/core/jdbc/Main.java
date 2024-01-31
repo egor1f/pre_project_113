@@ -25,9 +25,9 @@ public class Main {
         System.out.println("User с именем – Жаба добавлен в базу данных");
 
         List<User> testList = testService.getAllUsers();
-        testList.forEach(user -> {
-            System.out.println(user.toString());
-        });
+        for (User user : testList) {
+            System.out.println(user);
+        }
 
         testService.cleanUsersTable();
 
