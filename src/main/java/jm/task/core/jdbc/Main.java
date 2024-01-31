@@ -26,7 +26,7 @@ public class Main {
 
         List<User> testList = testService.getAllUsers();
         testList.forEach(user -> {
-            System.out.printf(user.toString());
+            System.out.println(user.toString());
         });
 
         testService.cleanUsersTable();

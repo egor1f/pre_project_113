@@ -21,7 +21,6 @@ public class User {
     public User() {
 
     }
-
     public User(String name, String lastName, Byte age) {
         this.name = name;
         this.lastName = lastName;
@@ -61,10 +60,14 @@ public class User {
     }
     @Override
     public String toString() {
-        return "User " + id +
-                " {name = '" + name + '\'' +
-                ", lastName = '" + lastName + '\'' +
-                ", age = " + age +
-                "} ";
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
+
+
+
