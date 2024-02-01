@@ -1,12 +1,11 @@
 package jm.task.core.jdbc.model;
 
-import org.hibernate.annotations.Entity;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "User")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
