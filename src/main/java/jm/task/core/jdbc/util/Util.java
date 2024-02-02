@@ -1,8 +1,6 @@
 package jm.task.core.jdbc.util;
 
-
 import java.util.Properties;
-
 import jm.task.core.jdbc.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -17,12 +15,16 @@ public class Util {
             try {
                 Configuration configuration = new Configuration();
 
-                // Hibernate settings equivalent to hibernate.cfg.xml's properties
                 Properties settings = new Properties();
+
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+
                 settings.put(Environment.URL, "jdbc:mysql://localhost:3306/userdb");
+
                 settings.put(Environment.USER, "root");
+
                 settings.put(Environment.PASS, "root");
+
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
 
                 settings.put(Environment.SHOW_SQL, "false");
@@ -39,6 +41,7 @@ public class Util {
                         .applySettings(configuration.getProperties()).build();
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

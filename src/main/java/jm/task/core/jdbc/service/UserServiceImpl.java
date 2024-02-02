@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao = new UserDaoHibernateImpl();
+    private final UserDao userDao = new UserDaoHibernateImpl();
     public void createUsersTable() {
         userDao.createUsersTable();
     }
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(name, lastName, age);
     }
 
-    public void removeUserById(long id) {UserDao userDao = new UserDaoHibernateImpl();
+    public void removeUserById(long id) {
         userDao.removeUserById(id);
     }
 
